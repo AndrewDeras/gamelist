@@ -1,0 +1,33 @@
+.card {
+  padding: 10px 10px;
+  margin: 10px auto;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
+
+.card-body {
+  padding: 10px;
+  text-align: center;
+}
+
+.card-title {
+  text-align: center;
+  font-weight: bold;
+}
+
+.card-text {
+  overflow: hidden;
+  /* max-height: 6rem; */
+}
+
+.btn {
+  border: none;
+  background-color: rgb(128, 0, 150);
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 10px ;
+
+  &:hover {
+    background-color: rgb(128, 0, 125);
+  }
+}
