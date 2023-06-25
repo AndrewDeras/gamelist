@@ -1,5 +1,7 @@
 # Lista de jogos gratuitos
 
+[Link do projeto](https://gamelist-ebon.vercel.app/)
+
 Este projeto consiste em uma lista de jogos gratuitos, onde o usuário pode filtrar os jogos por gênero através de um menu suspenso (select) ou pesquisar pelo título do jogo utilizando um formulário de pesquisa.
 
 ![Captura de tela da lista de jogos](./uploads/readme/gamelist1.png)
