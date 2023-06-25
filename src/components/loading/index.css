@@ -1,0 +1,9 @@
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff ;
+  color: rgb(128, 0, 150);
+  font-size: 24px
+}

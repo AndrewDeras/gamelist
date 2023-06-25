@@ -1,16 +1,29 @@
- * {
-   font-family: 'Montserrat', sans-serif;
-   background-color: #fff;
- }
+* {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff;
+}
 
- .row {
-   margin: 20px auto;
- }
+.row {
+  margin: 20px auto;
+  max-width: 1024px;
+}
 
- select {
-   max-width: 400px;
- }
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
- a {
-   text-decoration: none;
- }
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.form-select {
+  max-width: 400px;
+  margin-right: 10px;
+}
+
+a {
+  text-decoration: none;
+}
