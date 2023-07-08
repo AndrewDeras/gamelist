@@ -11,7 +11,11 @@ const Navbar = () => {
     <nav className="navbar bg-body-tertiary">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Hello {user.displayName}
+          {user ? (
+            `Hello ${user.displayName}`
+          ) : (
+            `Free games to play`
+          )}
         </Link>
         {!user ? (
           <ul>
