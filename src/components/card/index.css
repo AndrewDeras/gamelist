@@ -21,13 +21,43 @@
 
 .btn {
   border: none;
-  background-color: rgb(128, 0, 150);
+  background-color: #800096;
   color: #fff;
   font-weight: bold;
   font-size: 0.8rem;
-  padding: 10px ;
+  padding: 10px;
 
   &:hover {
-    background-color: rgb(128, 0, 125);
+    background-color: #80007d;
   }
+}
+
+.actions {
+  max-height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 15px;
+  margin-top: 15px;
+}
+
+.fav,
+.stars {
+  width: 100%;
+  text-align: center;
+}
+
+.fav i {
+  color: #DD2E44;
+}
+
+.stars i {
+  color: #FDD835;
+}
+
+.fav,
+.stars {
+  font-size: 25px;
+  font-weight: bold;
 }

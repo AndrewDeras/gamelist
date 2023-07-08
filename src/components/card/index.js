@@ -9,8 +9,22 @@ const Card = ({ game }) => {
         <p className="card-text"><small className="text-body-secondary"><strong>Genre:</strong> {game.genre}</small></p>
         <p className="card-text"><small className="text-body-secondary"><strong>Platform:</strong> {game.platform}</small></p>
         <p className="card-text flex-grow-1" style={{ maxHeight: '6rem', overflow: 'hidden' }}>{game.short_description}</p>
-        <a target='_blank' href={game.game_url} className="btn btn-primary mt-auto" rel="noreferrer">{`${game.title} page`}</a>
+        <a target='_blank' href={game.game_url} className="btn btn-primary mt-auto" rel="noreferrer">
+          {`${game.title} page`}
+        </a>
+        <div className='actions'>
+          <div className='fav' ><i className="bi bi-heart"></i></div>
+          <div className='stars' >
+            <span>
+              <i className="bi bi-star"></i>
+              <i className="bi bi-star"></i>
+              <i className="bi bi-star"></i>
+              <i className="bi bi-star"></i>
+            </span>
+          </div>
+        </div>
       </div>
+
     </div>
   );
 };

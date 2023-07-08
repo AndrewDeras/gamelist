@@ -1,3 +1,4 @@
+import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 
@@ -12,6 +13,7 @@ import { useState, useEffect } from 'react';
 import List from './pages/List';
 import Register from './pages/Register';
 import Loading from './components/loading';
+import Navbar from './components/navbar';
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -31,8 +33,10 @@ function App() {
 
   return (
     <div className="App">
+      <ToastContainer limit={1} autoClose={2000} />
       <AuthProvider value={{ user }} >
         <BrowserRouter>
+          <Navbar />
           <Routes>
             <Route path='/' Component={List} />
             <Route path='/auth' Component={Register} />

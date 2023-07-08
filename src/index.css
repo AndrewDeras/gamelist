@@ -8,22 +8,39 @@
   max-width: 1024px;
 }
 
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+a {
+  text-decoration: none;
+  color: black;
+  /* text-transform: uppercase; */
+  font-weight: bold;
 }
 
-.navbar-nav {
-  display: flex;
+ul {
+  display: inline-flex;
+  flex-direction: row;
+  list-style: none;
   align-items: center;
+  justify-content: flex-end;
+  margin: 0;
+}
+
+ul li {
+  margin: 10px;
+}
+
+header {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-select {
-  max-width: 400px;
-  margin-right: 10px;
+  max-width: 300px;
+  margin: 10px;
 }
 
-a {
-  text-decoration: none;
+header>form {
+  max-width: 300px;
+  margin: 10px;
 }
