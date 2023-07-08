@@ -1,8 +1,8 @@
 import './index.css'
 
-const Loading = () => {
+const Loading = ({ message }) => {
   return (
-    <div className='loading'>Loading Games</div>
+    <div className='loading'>{message}</div>
   )
 }
 

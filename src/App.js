@@ -26,9 +26,7 @@ function App() {
   }, [auth]);
 
   if (loadingUser) {
-    return (
-      <Loading />
-    )
+    return (< Loading message={'Obtendo usuário'} />)
   }
 
   return (

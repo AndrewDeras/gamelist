@@ -2,15 +2,21 @@ import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-//component
-import Card from '../../components/card/index';
-import Loading from '../../components/loading/index'
-
 // utils
 import { apiUrl, headerConfig, errorStatusList } from '../../utils/index';
 
+//context
+import { useAuthValue } from '../../context/AuthContext';
+
+//component
+import Card from '../../components/card/index';
+import Loading from '../../components/loading/index';
+import Navbar from '../../components/navbar';
+
+
 
 const List = () => {
+  const { user } = useAuthValue();
   const [games, setGames] = useState([]);
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
@@ -18,6 +24,7 @@ const List = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    console.log(user);
     async function getData() {
       setLoading(true);
       try {
@@ -61,7 +68,7 @@ const List = () => {
     return () => {
       mounted = false;
     };
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     if (selectedGenre === '') {
@@ -90,41 +97,16 @@ const List = () => {
   return (
     <>
       <ToastContainer limit={1} autoClose={2000} />
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
-        <div className="container-fluid">
-          <a href='/' className="navbar-brand">Free Games To Play</a>
-          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <select className="form-select" value={selectedGenre} onChange={handleGenreChange}>
-                  <option value="">All genres</option>
-                  {Array.from(new Set(games.map((game) => game.genre))).map((genre) => (
-                    <option key={genre} value={genre}>
-                      {genre}
-                    </option>
-                  ))}
-                </select>
-              </li>
-            </ul>
-            <form onSubmit={handleSearch} className="d-flex">
-              <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search by title"
-                aria-label="Search"
-                value={searchQuery}
-                onChange={handleSearchQueryChange}
-              />
-              <button className="btn btn-outline-success" type="submit">Search</button>
-            </form>
-          </div>
-        </div>
-      </nav>
+      <Navbar
+        selectedGenre={selectedGenre}
+        handleGenreChange={handleGenreChange}
+        handleSearch={handleSearch}
+        searchQuery={searchQuery}
+        handleSearchQueryChange={handleSearchQueryChange}
+        uniqueGenres={Array.from(new Set(games.map((game) => game.genre)))}
+      />
 
-      {loading ? (<Loading />) : (
+      {loading ? (<Loading message={'Loading'} />) : (
         <div className="row">
           {filteredGames && filteredGames.map((game, index) => (
             <Card key={String(index)} game={game} />
