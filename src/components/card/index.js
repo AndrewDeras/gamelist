@@ -12,6 +12,7 @@ const Card = ({ game, favGamesArr }) => {
 
   const { user } = useAuthValue();
   const handleFav = async (gameId) => {
+    if (!user) return;
     try {
       const userDocRef = doc(db, 'users', user.uid);
 

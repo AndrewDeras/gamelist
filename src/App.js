@@ -36,7 +36,6 @@ function App() {
   if (loadingUser) {
     return (< Loading message={'Obtendo usuário'} />)
   }
-  console.log(user);
 
   return (
     <div className="App">

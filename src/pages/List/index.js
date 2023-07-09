@@ -39,6 +39,7 @@ const List = ({ games, loading, error }) => {
         console.log(error.message);
       }
     }
+    if (!user) return;
     getUserFavGames();
 
     const updateListener = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
