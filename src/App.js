@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { onAuthStateChanged } from 'firebase/auth';
 
 // context
@@ -9,9 +9,11 @@ import { AuthProvider } from './context/AuthContext';
 import { useAuth } from './hooks/useAuth';
 import { useState, useEffect } from 'react';
 
-//components
+//pages
 import List from './pages/List';
-import Register from './pages/Register';
+import Auth from './pages/Auth';
+
+//components
 import Loading from './components/loading';
 import Navbar from './components/navbar';
 
@@ -38,8 +40,8 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path='/' Component={List} />
-            <Route path='/auth' Component={Register} />
+            <Route path='/' element={<List />} />
+            <Route path='/auth' element={!user ? <Auth /> : <Navigate to='/' />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

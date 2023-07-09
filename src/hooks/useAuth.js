@@ -14,8 +14,6 @@ export const useAuth = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
 
-  // deal with memory leak
-
   const [cancelled, setCancelled] = useState(false);
 
   const auth = getAuth();
@@ -25,6 +23,8 @@ export const useAuth = () => {
       return
     };
   }
+
+  // create user
 
   const createUser = async (data) => {
     checkIfIsCancelled();
@@ -58,6 +58,13 @@ export const useAuth = () => {
     }
   }
 
+  // logout
+
+  const logout = () => {
+    checkIfIsCancelled();
+    signOut(auth);
+  }
+
   useEffect(() => {
     return () => setCancelled(true);
   }, [])
@@ -66,7 +73,8 @@ export const useAuth = () => {
     auth,
     createUser,
     error,
-    loading
+    loading,
+    logout
   }
 
 };
