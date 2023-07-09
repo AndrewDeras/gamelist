@@ -61,9 +61,9 @@ const Login = () => {
         </div>
         <div className='mb-4'>
           {loading ? (
-            <button className='btn btn btn-primary mt-auto' type="submit" disabled >Logging...</button>
+            <button className='formBtn btn btn btn-primary mt-auto' type="submit" disabled >Logging...</button>
           ) : (
-            <button className='btn btn btn-primary mt-auto' type="submit" >Login</button>
+            <button className='formBtn btn btn btn-primary mt-auto' type="submit" >Login</button>
           )}
         </div>
       </form>

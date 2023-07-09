@@ -98,9 +98,9 @@ const Register = () => {
         </div>
         <div className='mb-4'>
           {loading ? (
-            <button className='btn btn btn-primary mt-auto' type="submit" disabled >Creating account...</button>
+            <button className='formBtn btn btn btn-primary mt-auto' type="submit" disabled >Creating account...</button>
           ) : (
-            <button className='btn btn btn-primary mt-auto' type="submit" >Create account</button>
+            <button className='formBtn btn btn btn-primary mt-auto' type="submit" >Create account</button>
           )}
         </div>
       </form>

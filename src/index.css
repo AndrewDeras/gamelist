@@ -40,10 +40,37 @@ header {
   margin: 10px;
 }
 
+.form-label {
+  margin: 0;
+}
+
 header>form {
   max-width: 300px;
   margin: 10px;
 }
+
+label {
+  text-align: left;
+  font-style: italic;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  border: none;
+  outline: none;
+  border-radius: 0;
+  border-bottom: 2px solid #000;
+  font-weight: 600;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+  box-shadow: none;
+  border-bottom: 2px solid #000;
+}
+
 
 .error-msg {
   width: 100%;
@@ -54,4 +81,8 @@ header>form {
   border: 1px solid #67272D;
   border-radius: 5px;
   font-weight: bold;
+}
+
+i {
+  cursor: pointer;
 }

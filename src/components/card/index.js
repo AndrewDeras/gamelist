@@ -1,6 +1,40 @@
 import './index.css';
 
-const Card = ({ game }) => {
+//firestore
+import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
+import { db } from '../../firebase/config';
+
+//context
+import { useAuthValue } from '../../context/AuthContext';
+
+
+const Card = ({ game, favGamesArr }) => {
+
+  const { user } = useAuthValue();
+  const handleFav = async (gameId) => {
+    try {
+      const userDocRef = doc(db, 'users', user.uid);
+
+      // verifica se já está favoritado, se sim o exclui do array
+      if (favGamesArr.includes(gameId)) {
+        await updateDoc(userDocRef, {
+          favGames: arrayRemove(gameId),
+        });
+
+      } else {
+        // adiciona o id do jogo 
+        await updateDoc(userDocRef, {
+          favGames: arrayUnion(gameId)
+        });
+        console.log('Jogo favoritado!');
+
+      }
+
+    } catch (error) {
+      console.log(error.message);
+    }
+  }
+
   return (
     <div key={String(game.id)} className="card col-lg-4 col-sm-2" style={{ width: '18rem' }}>
       <img src={game.thumbnail} className="card-img-top" alt={game.title} />
@@ -13,7 +47,13 @@ const Card = ({ game }) => {
           {`${game.title} page`}
         </a>
         <div className='actions'>
-          <div className='fav' ><i className="bi bi-heart"></i></div>
+          <div onClick={() => handleFav(game.id)} className='fav' >
+            {favGamesArr.includes(game.id) ? (
+              <i className="bi bi-heart-fill"></i>
+            ) : (
+              <i className="bi bi-heart"></i>
+            )}
+          </div>
           <div className='stars' >
             <span>
               <i className="bi bi-star"></i>

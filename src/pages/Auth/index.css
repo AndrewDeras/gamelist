@@ -34,3 +34,7 @@
 .registerCheck button.selected {
   border-bottom: 2px solid black;
 }
+
+.formBtn {
+  width: 100%;
+}

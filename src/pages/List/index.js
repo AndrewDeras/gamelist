@@ -1,15 +1,59 @@
 import { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
+//firestore
+import { db } from '../../firebase/config';
+import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+
+//context
+import { useAuthValue } from '../../context/AuthContext';
+
+
 //component
 import Card from '../../components/card/index';
 import Loading from '../../components/loading/index';
 
 const List = ({ games, loading, error }) => {
+  const { user } = useAuthValue();
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+  const [favGames, setFavGames] = useState([]);
+
+  useEffect(() => {
+    const getUserFavGames = async () => {
+
+      try {
+
+        const userDocRef = doc(db, 'users', user.uid);
+
+        const userFieldSnap = await getDoc(userDocRef, { fieldPaths: ['favGames'] });
+
+        if (userFieldSnap.exists()) {
+          const firestoreFavGames = userFieldSnap.data().favGames;
+          setFavGames(firestoreFavGames);
+        }
+
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    getUserFavGames();
+
+    const updateListener = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
+      const userData = snapshot.data();
+      if (userData) {
+        const firestoreFavGames = userData.favGames;
+        setFavGames(firestoreFavGames);
+      }
+    });
+
+    return () => {
+      updateListener();
+    };
+
+  }, [user])
 
   useEffect(() => {
     if (selectedGenre === '') {
@@ -64,7 +108,7 @@ const List = ({ games, loading, error }) => {
       {loading ? (<Loading message={'Loading'} />) : (
         <div className="row">
           {filteredGames && filteredGames.map((game, index) => (
-            <Card key={String(index)} game={game} />
+            <Card favGamesArr={favGames} key={String(index)} game={game} />
           ))}
         </div>
       )}

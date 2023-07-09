@@ -8,6 +8,8 @@ import {
   signOut
 } from 'firebase/auth';
 
+import { doc, setDoc } from 'firebase/firestore';
+
 import { useState, useEffect } from 'react';
 
 export const useAuth = () => {
@@ -40,6 +42,16 @@ export const useAuth = () => {
       )
 
       await updateProfile(user, { displayName: data.userName });
+
+      // criando documento do usuário na coleção users
+
+      const userDocRef = doc(db, 'users', user.uid);
+
+      await setDoc(userDocRef, {
+        userName: data.userName,
+        favGames: [],
+        rateGames: {}
+      });
 
       setLoading(false);
 

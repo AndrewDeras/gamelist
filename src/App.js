@@ -29,12 +29,14 @@ function App() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setUser(user);
-    })
+    });
   }, [auth]);
+
 
   if (loadingUser) {
     return (< Loading message={'Obtendo usuário'} />)
   }
+  console.log(user);
 
   return (
     <div className="App">
