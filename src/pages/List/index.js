@@ -1,20 +1,11 @@
 import { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
-//hooks
-import { useFetch } from '../../hooks/useFetch';
-
-//context
-// import { useAuthValue } from '../../context/AuthContext';
-
 //component
 import Card from '../../components/card/index';
 import Loading from '../../components/loading/index';
 
-const List = () => {
-  // const { user } = useAuthValue();
-  const { games, loading, error } = useFetch();
-
+const List = ({ games, loading, error }) => {
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);

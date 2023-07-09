@@ -48,10 +48,12 @@ export const useAuth = () => {
     } catch (error) {
       let errorMsg;
 
-      if (error.message.includes('email-already-in-use')) {
+      if (error.message.includes('email-already')) {
         errorMsg = 'E-mail already in use';
-      } else if (error.message.includes('Password should be at least 6 characters')) {
+      } else if (error.message.includes('Password')) {
         errorMsg = 'Password should be at least 6 characters';
+      } else {
+        errorMsg = 'Something went wrong, try again later.'
       }
       setLoading(false);
       setError(errorMsg);
@@ -65,6 +67,33 @@ export const useAuth = () => {
     signOut(auth);
   }
 
+  // login
+
+  const login = async (data) => {
+    checkIfIsCancelled();
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      let errorMsg;
+
+      if (error.message.includes('user-not-found')) {
+        errorMsg = 'User not found';
+      } else if (error.message.includes('wrong-password')) {
+        errorMsg = 'Wrong password';
+      } else {
+        errorMsg = 'Something went wrong, try again later.'
+      }
+
+      setLoading(false);
+      setError(errorMsg);
+    }
+  }
+
   useEffect(() => {
     return () => setCancelled(true);
   }, [])
@@ -74,7 +103,8 @@ export const useAuth = () => {
     createUser,
     error,
     loading,
-    logout
+    logout,
+    login
   }
 
 };

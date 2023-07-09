@@ -8,6 +8,7 @@ import { AuthProvider } from './context/AuthContext';
 //hooks
 import { useAuth } from './hooks/useAuth';
 import { useState, useEffect } from 'react';
+import { useFetch } from './hooks/useFetch';
 
 //pages
 import List from './pages/List';
@@ -17,7 +18,9 @@ import Auth from './pages/Auth';
 import Loading from './components/loading';
 import Navbar from './components/navbar';
 
+
 function App() {
+  const { games, loading, error } = useFetch();
   const [user, setUser] = useState(undefined);
   const { auth } = useAuth();
 
@@ -40,7 +43,7 @@ function App() {
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path='/' element={<List />} />
+            <Route path='/' element={<List games={games} loading={loading} error={error} />} />
             <Route path='/auth' element={!user ? <Auth /> : <Navigate to='/' />} />
           </Routes>
         </BrowserRouter>
