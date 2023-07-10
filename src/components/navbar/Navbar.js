@@ -29,7 +29,7 @@ const Navbar = () => {
         ) : (
           <ul>
             <li>
-              <Link to="/fav">My Favorite Games</Link>
+              <Link to="/favorite">My Favorite Games</Link>
             </li>
             <li>
               <Link onClick={logout}>Logout</Link>

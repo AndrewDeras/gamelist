@@ -13,7 +13,7 @@ import Card from '../../components/card/Card';
 import Loading from '../../components/loading/Loading';
 
 const Main = () => {
-  const { user, games, loading, error } = useContextValue();
+  const { user, games, loading, error, } = useContextValue();
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
@@ -44,9 +44,7 @@ const Main = () => {
       }
     };
 
-    console.log(ratings);
     getRatings();
-
 
     // pegar os ids dos jogos favoritados
     const getUserFavGames = async () => {
