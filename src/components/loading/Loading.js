@@ -1,4 +1,4 @@
-import './index.css'
+import './loading.css'
 
 const Loading = ({ message }) => {
   return (

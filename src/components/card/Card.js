@@ -1,21 +1,22 @@
-import './index.css';
-import { useNavigate } from 'react-router-dom';
+//css
+import './card.css';
 
 // hooks
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 //firestore
-import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
-import { db } from '../../firebase/config';
+import { updateFavGameList } from '../../firebase/updateFavGameList';
+import { updateGameRate } from '../../firebase/updateGameRate';
 
 //context
-import { useAuthValue } from '../../context/AuthContext';
+import { useContextValue } from '../../context/AuthContext';
 
 
 const Card = ({ game, favGamesArr, ratings }) => {
   const navigate = useNavigate();
   const [rate, setRate] = useState(0);
-  const { user } = useAuthValue();
+  const { user } = useContextValue();
 
   useEffect(() => {
     if (ratings) {
@@ -33,53 +34,18 @@ const Card = ({ game, favGamesArr, ratings }) => {
     setRate(newRate);
 
     // atualizar avaliação no banco
+    updateGameRate(user, game, rate, newRate);
 
-    const updateRate = async () => {
-      try {
-        const userDocRef = doc(db, 'users', user.uid);
-
-        if (newRate === rate) {
-          await updateDoc(userDocRef, {
-            [`rateGames.${game.id}`]: rate - 1,
-          });
-        } else {
-          await updateDoc(userDocRef, {
-            [`rateGames.${game.id}`]: newRate,
-          });
-        }
-
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-
-    updateRate();
   };
 
-  const handleFav = async (gameId) => {
-    if (!user) return;
-    try {
-      const userDocRef = doc(db, 'users', user.uid);
+  const handleFav = (gameId) => {
 
-      // verifica se já está favoritado, se sim o exclui do array
-      if (favGamesArr.includes(gameId)) {
-        await updateDoc(userDocRef, {
-          favGames: arrayRemove(gameId),
-        });
-
-      } else {
-        // adiciona o id do jogo 
-        await updateDoc(userDocRef, {
-          favGames: arrayUnion(gameId)
-        });
-        console.log('Jogo favoritado!');
-
-      }
-
-    } catch (error) {
-      console.log(error.message);
+    if (!user) {
+      return navigate('/auth');
     }
-  }
+
+    updateFavGameList(user, gameId, favGamesArr);
+  };
 
   return (
     <div key={String(game.id)} className="card col-lg-4 col-sm-2" style={{ width: '18rem' }}>

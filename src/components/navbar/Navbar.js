@@ -5,10 +5,10 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 // Context
-import { useAuthValue } from '../../context/AuthContext';
+import { useContextValue } from '../../context/AuthContext';
 
 const Navbar = () => {
-  const { user } = useAuthValue();
+  const { user } = useContextValue();
   const { logout } = useAuth();
   return (
     <nav className="navbar bg-body-tertiary">

@@ -1,12 +1,12 @@
 // css
-import './index.css';
+import './auth.css';
 
 // hooks
 import { useState } from 'react';
 
 // components
-import Login from '../../components/login';
-import Register from '../../components/register';
+import Login from '../../components/login/Login';
+import Register from '../../components/register/Register';
 
 const Auth = () => {
   const [login, setLogin] = useState(false);

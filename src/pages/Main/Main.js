@@ -6,15 +6,14 @@ import { db } from '../../firebase/config';
 import { doc, getDoc, onSnapshot } from 'firebase/firestore';
 
 //context
-import { useAuthValue } from '../../context/AuthContext';
-
+import { useContextValue } from '../../context/AuthContext';
 
 //component
-import Card from '../../components/card/index';
-import Loading from '../../components/loading/index';
+import Card from '../../components/card/Card';
+import Loading from '../../components/loading/Loading';
 
-const List = ({ games, loading, error }) => {
-  const { user } = useAuthValue();
+const Main = () => {
+  const { user, games, loading, error } = useContextValue();
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
@@ -111,6 +110,8 @@ const List = ({ games, loading, error }) => {
   const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
+
   return (
     <>
 
@@ -150,4 +151,4 @@ const List = ({ games, loading, error }) => {
   )
 }
 
-export default List
+export default Main

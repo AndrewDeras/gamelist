@@ -11,16 +11,17 @@ import { useState, useEffect } from 'react';
 import { useFetch } from './hooks/useFetch';
 
 //pages
-import List from './pages/List';
-import Auth from './pages/Auth';
+import Main from './pages/Main/Main';
+import Auth from './pages/Auth/Auth';
 
 //components
-import Loading from './components/loading';
-import Navbar from './components/navbar';
+import Loading from './components/loading/Loading';
+import Navbar from './components/navbar/Navbar';
 
 
 function App() {
-  const { games, loading, error } = useFetch();
+  const gamesList = useFetch();
+
   const [user, setUser] = useState(undefined);
   const { auth } = useAuth();
 
@@ -40,11 +41,11 @@ function App() {
   return (
     <div className="App">
       <ToastContainer limit={1} autoClose={2000} />
-      <AuthProvider value={{ user }} >
+      <AuthProvider value={{ user, ...gamesList }} >
         <BrowserRouter>
           <Navbar />
           <Routes>
-            <Route path='/' element={<List games={games} loading={loading} error={error} />} />
+            <Route path='/' element={<Main />} />
             <Route path='/auth' element={!user ? <Auth /> : <Navigate to='/' />} />
           </Routes>
         </BrowserRouter>
