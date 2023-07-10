@@ -19,9 +19,37 @@ const List = ({ games, loading, error }) => {
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
+
   const [favGames, setFavGames] = useState([]);
+  const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
+    if (!user) return;
+
+    // pegar as avaliações dos jogos
+
+    const getRatings = async () => {
+      try {
+
+        const userDocRef = doc(db, 'users', user.uid);
+
+        const userFieldSnap = await getDoc(userDocRef, { fieldPaths: ['rateGames'] });
+
+        if (userFieldSnap.exists()) {
+          const firestoreRateGames = userFieldSnap.data().rateGames;
+          setRatings(firestoreRateGames);
+        }
+
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+
+    console.log(ratings);
+    getRatings();
+
+
+    // pegar os ids dos jogos favoritados
     const getUserFavGames = async () => {
 
       try {
@@ -39,22 +67,25 @@ const List = ({ games, loading, error }) => {
         console.log(error.message);
       }
     }
-    if (!user) return;
     getUserFavGames();
 
     const updateListener = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
       const userData = snapshot.data();
       if (userData) {
         const firestoreFavGames = userData.favGames;
+        const firestoreRateGames = userData.rateGames;
+        setRatings(firestoreRateGames);
         setFavGames(firestoreFavGames);
       }
     });
 
-    return () => {
+    const unsubscribe = () => {
       updateListener();
     };
 
-  }, [user])
+    return unsubscribe;
+
+  }, [user]);
 
   useEffect(() => {
     if (selectedGenre === '') {
@@ -109,7 +140,7 @@ const List = ({ games, loading, error }) => {
       {loading ? (<Loading message={'Loading'} />) : (
         <div className="row">
           {filteredGames && filteredGames.map((game, index) => (
-            <Card favGamesArr={favGames} key={String(index)} game={game} />
+            <Card ratings={ratings} favGamesArr={favGames} key={String(index)} game={game} />
           ))}
         </div>
       )}

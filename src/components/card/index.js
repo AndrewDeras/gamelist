@@ -1,4 +1,8 @@
 import './index.css';
+import { useNavigate } from 'react-router-dom';
+
+// hooks
+import { useEffect, useState } from 'react';
 
 //firestore
 import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
@@ -8,9 +12,50 @@ import { db } from '../../firebase/config';
 import { useAuthValue } from '../../context/AuthContext';
 
 
-const Card = ({ game, favGamesArr }) => {
-
+const Card = ({ game, favGamesArr, ratings }) => {
+  const navigate = useNavigate();
+  const [rate, setRate] = useState(0);
   const { user } = useAuthValue();
+
+  useEffect(() => {
+    if (ratings) {
+      setRate(ratings[`${game.id}`] || 0);
+    }
+  }, [ratings, game.id])
+
+  const handleRatingChange = (e) => {
+
+    if (!user) {
+      return navigate('/auth');
+    }
+
+    const newRate = parseInt(e.target.getAttribute("value"));
+    setRate(newRate);
+
+    // atualizar avaliação no banco
+
+    const updateRate = async () => {
+      try {
+        const userDocRef = doc(db, 'users', user.uid);
+
+        if (newRate === rate) {
+          await updateDoc(userDocRef, {
+            [`rateGames.${game.id}`]: rate - 1,
+          });
+        } else {
+          await updateDoc(userDocRef, {
+            [`rateGames.${game.id}`]: newRate,
+          });
+        }
+
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+
+    updateRate();
+  };
+
   const handleFav = async (gameId) => {
     if (!user) return;
     try {
@@ -55,12 +100,28 @@ const Card = ({ game, favGamesArr }) => {
               <i className="bi bi-heart"></i>
             )}
           </div>
-          <div className='stars' >
+          <div className="stars">
             <span>
-              <i className="bi bi-star"></i>
-              <i className="bi bi-star"></i>
-              <i className="bi bi-star"></i>
-              <i className="bi bi-star"></i>
+              <i
+                value={1}
+                className={`bi bi-star${rate >= 1 ? "-fill" : ""}`}
+                onClick={handleRatingChange}
+              ></i>
+              <i
+                value={2}
+                className={`bi bi-star${rate >= 2 ? "-fill" : ""}`}
+                onClick={handleRatingChange}
+              ></i>
+              <i
+                value={3}
+                className={`bi bi-star${rate >= 3 ? "-fill" : ""}`}
+                onClick={handleRatingChange}
+              ></i>
+              <i
+                value={4}
+                className={`bi bi-star${rate >= 4 ? "-fill" : ""}`}
+                onClick={handleRatingChange}
+              ></i>
             </span>
           </div>
         </div>
