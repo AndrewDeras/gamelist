@@ -27,6 +27,7 @@ a {
 
 .navbar-brand {
   color: #FEFEFF;
+  padding-bottom: 0;
 }
 
 ul {
