@@ -1,7 +1,13 @@
 * {
   font-family: 'Montserrat', sans-serif;
-  background-color: #fff;
+  background-color: #15202B;
+  color: #FEFEFF;
 }
+
+.body {
+  background-color: #15202B;
+}
+
 
 .row {
   margin: 20px auto;
@@ -10,9 +16,17 @@
 
 a {
   text-decoration: none;
-  color: black;
+  color: #FEFEFF;
   /* text-transform: uppercase; */
   font-weight: bold;
+}
+
+.navbar {
+  border-bottom: 1px solid #71879f;
+}
+
+.navbar-brand {
+  color: #FEFEFF;
 }
 
 ul {
@@ -54,13 +68,30 @@ label {
   font-style: italic;
 }
 
+.form-control,
+.form-select {
+  background-color: #273340;
+  color: #8794A1;
+  border: none;
+
+  &::placeholder {
+    color: #8794A1;
+  }
+
+  &:focus {
+    background-color: #273340;
+    color: #8794A1;
+    box-shadow: none;
+  }
+}
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
   border: none;
   outline: none;
   border-radius: 0;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #71879f;
   font-weight: 600;
 }
 
@@ -68,7 +99,7 @@ input[type="text"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus {
   box-shadow: none;
-  border-bottom: 2px solid #000;
+  border-bottom: 2px solid #71879f;
 }
 
 

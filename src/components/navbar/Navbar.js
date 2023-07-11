@@ -11,13 +11,13 @@ const Navbar = () => {
   const { user } = useContextValue();
   const { logout } = useAuth();
   return (
-    <nav className="navbar bg-body-tertiary">
+    <nav className="navbar">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           {user ? (
-            `Hello ${user.displayName}`
+            <h4>Hello {user.displayName}</h4>
           ) : (
-            `Free games to play`
+            <h4>Free games to play</h4>
           )}
         </Link>
         {!user ? (

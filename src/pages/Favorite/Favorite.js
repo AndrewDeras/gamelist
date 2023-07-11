@@ -1,27 +1,26 @@
 import { useState, useEffect } from 'react';
-
-//context
 import { useContextValue } from '../../context/AuthContext';
-
-//components
 import Loading from '../../components/loading/Loading';
 import Card from '../../components/card/Card';
 
 const Favorite = () => {
-  const [selectedGenre, setSelectedGenre] = useState('');
-  const [filteredGames, setFilteredGames] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-
   const { games, loading, error, favGames, rateGames: ratings } = useContextValue();
+  const [selectedGenre, setSelectedGenre] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredGames, setFilteredGames] = useState([]);
 
   useEffect(() => {
-    if (selectedGenre === '') {
-      setFilteredGames(games.filter((game) => favGames.includes(game.id)));
+    if (selectedGenre === '' && searchQuery === '') {
+      setFilteredGames(games.filter((game) => favGames.includes(String(game.id))));
     } else {
-      const filtered = games.filter((game) => game.genre === selectedGenre && favGames.includes(game.id));
+      const filtered = games.filter((game) =>
+        favGames.includes(String(game.id)) &&
+        (selectedGenre === '' || game.genre === selectedGenre) &&
+        (searchQuery === '' || game.title.toLowerCase().includes(searchQuery.toLowerCase()))
+      );
       setFilteredGames(filtered);
     }
-  }, [selectedGenre, games, favGames]);
+  }, [games, favGames, selectedGenre, searchQuery]);
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
@@ -29,13 +28,6 @@ const Favorite = () => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    const filtered = games.filter((game) =>
-      game.title.toLowerCase().includes(searchQuery.toLowerCase()) && favGames.includes(game.id)
-    );
-    setFilteredGames(filtered);
-  };
-
-  const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
@@ -58,25 +50,30 @@ const Favorite = () => {
             placeholder="Search by title"
             aria-label="Search"
             value={searchQuery}
-            onChange={handleSearchQueryChange}
+            onChange={handleSearch}
           />
-          <button className="btn btn-outline-success" type="submit">Search</button>
+          <button className="btn btn-outline-success" type="submit">
+            Search
+          </button>
         </form>
+        <button className="btn btn-outline-primary">
+          Sort by Rating
+        </button>
       </header>
 
-      {loading ? (<Loading message={'Loading'} />) : (
-        filteredGames.length > 0 ? (
-          <div className="row">
-            {filteredGames.map((game, index) => (
-              <Card ratings={ratings} favGamesArr={favGames} key={String(index)} game={game} />
-            ))}
-          </div>
-        ) : (
-          <p>No favorite games found.</p>
-        )
+      {loading ? (
+        <Loading message="Loading" />
+      ) : filteredGames.length > 0 ? (
+        <div className="row">
+          {filteredGames.map((game) => (
+            <Card ratings={ratings} favGamesArr={favGames} key={game.id} game={game} />
+          ))}
+        </div>
+      ) : (
+        <p>No favorite games found.</p>
       )}
 
-      {error && (<Loading message={error} />)}
+      {error && <Loading message={error} />}
     </>
   );
 };

@@ -43,26 +43,26 @@ function App() {
     };
   }, [auth]);
 
-  useEffect(() => {
-    if (user) {
-      const getData = async () => {
-        try {
-          const docRef = doc(db, 'users', user.uid);
-          const docSnap = await getDoc(docRef);
+  // useEffect(() => {
+  //   if (user) {
+  //     const getData = async () => {
+  //       try {
+  //         const docRef = doc(db, 'users', user.uid);
+  //         const docSnap = await getDoc(docRef);
 
-          if (docSnap.exists()) {
-            setUserData(docSnap.data());
-          } else {
-            console.log("No such document!");
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
+  //         if (docSnap.exists()) {
+  //           setUserData(docSnap.data());
+  //         } else {
+  //           console.log("No such document!");
+  //         }
+  //       } catch (error) {
+  //         console.log(error.message);
+  //       }
+  //     };
 
-      getData();
-    }
-  }, [user]);
+  //     getData();
+  //   }
+  // }, [user, userData]);
 
   if (loadingUser) {
     return <Loading message="..." />;

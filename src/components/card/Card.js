@@ -52,8 +52,8 @@ const Card = ({ game, favGamesArr, ratings }) => {
       <img src={game.thumbnail} className="card-img-top" alt={game.title} />
       <div className="card-body d-flex flex-column">
         <h4 className="card-title">{game.title}</h4>
-        <p className="card-text"><small className="text-body-secondary"><strong>Genre:</strong> {game.genre}</small></p>
-        <p className="card-text"><small className="text-body-secondary"><strong>Platform:</strong> {game.platform}</small></p>
+        <p className="card-text"><small><strong>Genre:</strong> {game.genre}</small></p>
+        <p className="card-text"><small><strong>Platform:</strong> {game.platform}</small></p>
         <p className="card-text flex-grow-1" style={{ maxHeight: '6rem', overflow: 'hidden' }}>{game.short_description}</p>
         <a target='_blank' href={game.game_url} className="btn btn-primary mt-auto" rel="noreferrer">
           {`${game.title} page`}
