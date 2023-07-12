@@ -5,7 +5,7 @@ import Card from '../../components/card/Card';
 
 const Favorite = () => {
   const { userData, loading, error } = useContextValue();
-  const { favGames, rateGames } = userData || {};
+  const { favGames } = userData || {};
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
@@ -25,8 +25,17 @@ const Favorite = () => {
   };
 
   const handleSearch = (event) => {
+    event.preventDefault();
+    const filtered = favGames.filter((game) =>
+      game.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredGames(filtered);
+  };
+
+  const handleSearchQueryChange = (event) => {
     setSearchQuery(event.target.value);
   };
+
 
   return (
     <>
@@ -49,11 +58,9 @@ const Favorite = () => {
             placeholder="Search by title"
             aria-label="Search"
             value={searchQuery}
-            onChange={handleSearch}
+            onChange={handleSearchQueryChange}
           />
-          <button className="btn btn-outline-success" type="submit">
-            Search
-          </button>
+          <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
         <button className="btn btn-outline-primary">Sort by Rating</button>
       </header>
@@ -63,7 +70,7 @@ const Favorite = () => {
       ) : filteredGames.length > 0 ? (
         <div className="row">
           {filteredGames.map((game) => (
-            <Card ratings={rateGames} favGamesArr={favGames} key={game.id} game={game} />
+            <Card key={game.id} game={game} />
           ))}
         </div>
       ) : (

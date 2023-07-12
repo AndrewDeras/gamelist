@@ -29,27 +29,20 @@ export const useFetch = () => {
         if (isMounted) {
           if (errorStatusList.includes(response.status) || response.status === 400) {
             setError('The server failed to respond, try reloading the page');
+            setLoading(false);
             toast.error('The server failed to respond, try reloading the page');
             return;
           }
 
           if (response.status !== 200) {
             setError('The server will not be able to respond for now, please try to come back later.');
+            setLoading(false);
             return toast.error('The server will not be able to respond for now, please try to come back later.');
           }
 
           setGames(data);
           setLoading(false);
-          toast.success('Game list ready', {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
+          toast.success('Game list ready');
         }
       } catch (error) {
         if (isMounted) {

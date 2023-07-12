@@ -28,11 +28,3 @@ export const updateFavGameList = async (user, game, userData) => {
     console.log(error.message);
   }
 };
-
-
-
-
-
-
-
-

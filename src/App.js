@@ -64,7 +64,17 @@ function App() {
 
   return (
     <div className="App">
-      <ToastContainer />
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        closeOnClick={true}
+        pauseOnHover={true}
+        draggable={true}
+        progress={undefined}
+        theme="dark"
+        limit={1}
+      />
       <AuthProvider value={{ user, ...gamesList, userData }}>
         <BrowserRouter>
           <Navbar />

@@ -1,29 +1,25 @@
-//css
-import './card.css';
-
-// hooks
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-//firestore
 import { updateFavGameList } from '../../firebase/updateFavGameList';
 import { updateGameRate } from '../../firebase/updateGameRate';
-
-//context
 import { useContextValue } from '../../context/AuthContext';
 
+import './card.css';
 
-const Card = ({ game, ratings }) => {
+const Card = ({ game }) => {
   const navigate = useNavigate();
   const [rate, setRate] = useState(0);
   const { user, userData } = useContextValue();
   const isGameInFavorites = userData && userData.favGames && userData.favGames.some((favGame) => favGame.id === game.id);
+  const isGameInRatedGames = userData && userData.ratedGames && userData.ratedGames.some((ratedGame) => ratedGame.id === game.id);
 
   useEffect(() => {
-    if (ratings) {
-      setRate(ratings[`${game.id}`] || 0);
+    if (isGameInRatedGames) {
+      const ratedGame = userData.ratedGames.find((ratedGame) => ratedGame.id === game.id);
+      setRate(ratedGame.rate);
     }
-  }, [ratings, game.id]);
+  }, [isGameInRatedGames, userData.ratedGames, game.id]);
 
   const handleRatingChange = (e) => {
     if (!user) {
@@ -33,7 +29,7 @@ const Card = ({ game, ratings }) => {
     const newRate = parseInt(e.target.getAttribute('value'));
     setRate(newRate);
 
-    updateGameRate(user, game, newRate);
+    updateGameRate(user, game, newRate, userData);
   };
 
   const handleFav = (game) => {
@@ -63,7 +59,7 @@ const Card = ({ game, ratings }) => {
           {game.short_description}
         </p>
         <a target="_blank" href={game.game_url} className="btn btn-primary mt-auto" rel="noreferrer">
-          {`${game.title} page`}
+          {`${game.title} Website`}
         </a>
         <div className="actions">
           <div onClick={() => handleFav(game)} className="fav">

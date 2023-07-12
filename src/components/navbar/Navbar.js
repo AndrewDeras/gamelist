@@ -23,11 +23,20 @@ const Navbar = () => {
         {!user ? (
           <ul>
             <li>
+              <Link to='/' >
+                <i className="bi bi-house-door-fill"> </i></Link>
+            </li>
+            <li>
               <Link to="/auth">Login/CreateAccount</Link>
             </li>
+
           </ul>
         ) : (
           <ul>
+            <li>
+              <Link to='/' >
+                <i className="bi bi-house-door-fill"> </i></Link>
+            </li>
             <li>
               <Link to="/favorite">My Favorite Games</Link>
             </li>
