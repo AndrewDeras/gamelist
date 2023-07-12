@@ -13,38 +13,35 @@ import { updateGameRate } from '../../firebase/updateGameRate';
 import { useContextValue } from '../../context/AuthContext';
 
 
-const Card = ({ game, favGamesArr, ratings }) => {
+const Card = ({ game, ratings }) => {
   const navigate = useNavigate();
   const [rate, setRate] = useState(0);
-  const { user } = useContextValue();
+  const { user, userData } = useContextValue();
+  const isGameInFavorites = userData && userData.favGames && userData.favGames.some((favGame) => favGame.id === game.id);
 
   useEffect(() => {
     if (ratings) {
       setRate(ratings[`${game.id}`] || 0);
     }
-  }, [ratings, game.id])
+  }, [ratings, game.id]);
 
   const handleRatingChange = (e) => {
-
     if (!user) {
       return navigate('/auth');
     }
 
-    const newRate = parseInt(e.target.getAttribute("value"));
+    const newRate = parseInt(e.target.getAttribute('value'));
     setRate(newRate);
 
-    // atualizar avaliação no banco
-    updateGameRate(user, game, rate, newRate);
-
+    updateGameRate(user, game, newRate);
   };
 
-  const handleFav = (gameId) => {
-
+  const handleFav = (game) => {
     if (!user) {
       return navigate('/auth');
     }
 
-    updateFavGameList(user, gameId, favGamesArr);
+    updateFavGameList(user, game, userData);
   };
 
   return (
@@ -52,47 +49,52 @@ const Card = ({ game, favGamesArr, ratings }) => {
       <img src={game.thumbnail} className="card-img-top" alt={game.title} />
       <div className="card-body d-flex flex-column">
         <h4 className="card-title">{game.title}</h4>
-        <p className="card-text"><small><strong>Genre:</strong> {game.genre}</small></p>
-        <p className="card-text"><small><strong>Platform:</strong> {game.platform}</small></p>
-        <p className="card-text flex-grow-1" style={{ maxHeight: '6rem', overflow: 'hidden' }}>{game.short_description}</p>
-        <a target='_blank' href={game.game_url} className="btn btn-primary mt-auto" rel="noreferrer">
+        <p className="card-text">
+          <small>
+            <strong>Genre:</strong> {game.genre}
+          </small>
+        </p>
+        <p className="card-text">
+          <small>
+            <strong>Platform:</strong> {game.platform}
+          </small>
+        </p>
+        <p className="card-text flex-grow-1" style={{ maxHeight: '6rem', overflow: 'hidden' }}>
+          {game.short_description}
+        </p>
+        <a target="_blank" href={game.game_url} className="btn btn-primary mt-auto" rel="noreferrer">
           {`${game.title} page`}
         </a>
-        <div className='actions'>
-          <div onClick={() => handleFav(game.id)} className='fav' >
-            {favGamesArr.includes(game.id) ? (
-              <i className="bi bi-heart-fill"></i>
-            ) : (
-              <i className="bi bi-heart"></i>
-            )}
+        <div className="actions">
+          <div onClick={() => handleFav(game)} className="fav">
+            {isGameInFavorites ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"></i>}
           </div>
           <div className="stars">
             <span>
               <i
                 value={1}
-                className={`bi bi-star${rate >= 1 ? "-fill" : ""}`}
+                className={`bi bi-star${rate >= 1 ? '-fill' : ''}`}
                 onClick={handleRatingChange}
               ></i>
               <i
                 value={2}
-                className={`bi bi-star${rate >= 2 ? "-fill" : ""}`}
+                className={`bi bi-star${rate >= 2 ? '-fill' : ''}`}
                 onClick={handleRatingChange}
               ></i>
               <i
                 value={3}
-                className={`bi bi-star${rate >= 3 ? "-fill" : ""}`}
+                className={`bi bi-star${rate >= 3 ? '-fill' : ''}`}
                 onClick={handleRatingChange}
               ></i>
               <i
                 value={4}
-                className={`bi bi-star${rate >= 4 ? "-fill" : ""}`}
+                className={`bi bi-star${rate >= 4 ? '-fill' : ''}`}
                 onClick={handleRatingChange}
               ></i>
             </span>
           </div>
         </div>
       </div>
-
     </div>
   );
 };

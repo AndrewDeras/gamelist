@@ -12,6 +12,21 @@
 .row {
   margin: 20px auto;
   max-width: 1024px;
+  display: flex;
+  justify-content: center;
+}
+
+h4 {
+  margin-bottom: 0;
+}
+
+#brand-h4 {
+  color: #FEFEFF;
+
+  &:hover {
+    color: #FEFEFF;
+  }
+
 }
 
 a {
@@ -28,6 +43,10 @@ a {
 .navbar-brand {
   color: #FEFEFF;
   padding-bottom: 0;
+
+  &:hover {
+    color: #FEFEFF;
+  }
 }
 
 ul {

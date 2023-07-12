@@ -45,9 +45,8 @@ const Register = () => {
 
     const user = { userName, email, password };
 
-    const res = await createUser(user);
+    await createUser(user);
 
-    console.log(res);
 
   };
 

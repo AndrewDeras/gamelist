@@ -2,9 +2,9 @@ import { ToastContainer } from 'react-toastify';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 //firestore
-import { db } from './firebase/config';
 import { onAuthStateChanged } from 'firebase/auth';
-import { doc, getDoc } from 'firebase/firestore';
+import { db } from './firebase/config';
+import { doc, onSnapshot } from 'firebase/firestore';
 
 // context
 import { AuthProvider } from './context/AuthContext';
@@ -20,59 +20,53 @@ import Auth from './pages/Auth/Auth';
 import Favorite from './pages/Favorite/Favorite';
 
 //components
-import Loading from './components/loading/Loading';
+import Modal from './components/modal/Modal';
 import Navbar from './components/navbar/Navbar';
 
 
 function App() {
   const gamesList = useFetch();
-
   const { auth } = useAuth();
-  const [user, setUser] = useState(null);
-  const [userData, setUserData] = useState(null);
-  const [loadingUser, setLoadingUser] = useState(true);
+  const [user, setUser] = useState(undefined);
+  const [userData, setUserData] = useState(undefined);
+  const loadingUser = user === undefined;
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, (user) => {
       setUser(user);
-      setLoadingUser(false);
+
+      if (user) {
+        const docRef = doc(db, 'users', user.uid);
+
+        // Registra o observador usando onSnapshot()
+        const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+          if (docSnapshot.exists()) {
+            setUserData(docSnapshot.data());
+          } else {
+            console.log('Documento não encontrado');
+          }
+        });
+
+        return () => {
+          unsubscribe();
+        }
+      } else {
+        setUserData(undefined);
+      }
     });
 
-    return () => {
-      unsubscribe();
-    };
   }, [auth]);
 
-  useEffect(() => {
-    if (user) {
-      const getData = async () => {
-        try {
-          const docRef = doc(db, 'users', user.uid);
-          const docSnap = await getDoc(docRef);
-
-          if (docSnap.exists()) {
-            setUserData(docSnap.data());
-          } else {
-            console.log("No such document!");
-          }
-        } catch (error) {
-          console.log(error.message);
-        }
-      };
-
-      getData();
-    }
-  }, []);
 
   if (loadingUser) {
-    return <Loading message="..." />;
+    return <Modal message="..." />;
   }
 
 
   return (
     <div className="App">
       <ToastContainer limit={1} autoClose={2000} />
-      <AuthProvider value={{ user, ...gamesList, ...userData }}>
+      <AuthProvider value={{ user, ...gamesList, userData }}>
         <BrowserRouter>
           <Navbar />
           <Routes>

@@ -50,7 +50,7 @@ export const useAuth = () => {
       await setDoc(userDocRef, {
         userName: data.userName,
         favGames: [],
-        rateGames: []
+        ratedGames: []
       });
 
       setLoading(false);

@@ -15,7 +15,7 @@ const Navbar = () => {
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           {user ? (
-            <h4>Hello {user.displayName}</h4>
+            <h4 id='brand-h4'>Hello {user.displayName}</h4>
           ) : (
             <h4>Free games to play</h4>
           )}

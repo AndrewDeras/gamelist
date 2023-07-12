@@ -1,88 +1,20 @@
 import { useState, useEffect } from 'react';
 import 'react-toastify/dist/ReactToastify.css';
 
-//firestore
-import { db } from '../../firebase/config';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
-
 //context
 import { useContextValue } from '../../context/AuthContext';
 
 //component
 import Card from '../../components/card/Card';
-import Loading from '../../components/loading/Loading';
+import Modal from '../../components/modal/Modal';
 
 const Main = () => {
-  const { user, games, loading, error, } = useContextValue();
+  const { games, loading, error, userData } = useContextValue();
+  const { favGames, rateGames } = userData ?? {};
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-
-  const [favGames, setFavGames] = useState([]);
-  const [ratings, setRatings] = useState([]);
-
-  useEffect(() => {
-    if (!user) return;
-
-    // pegar as avaliações dos jogos
-
-    const getRatings = async () => {
-      try {
-
-        const userDocRef = doc(db, 'users', user.uid);
-
-        const userFieldSnap = await getDoc(userDocRef, { fieldPaths: ['rateGames'] });
-
-        if (userFieldSnap.exists()) {
-          const firestoreRateGames = userFieldSnap.data().rateGames;
-          setRatings(firestoreRateGames);
-        }
-
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
-
-    getRatings();
-
-    // pegar os ids dos jogos favoritados
-    const getUserFavGames = async () => {
-
-      try {
-
-        const userDocRef = doc(db, 'users', user.uid);
-
-        const userFieldSnap = await getDoc(userDocRef, { fieldPaths: ['favGames'] });
-
-        if (userFieldSnap.exists()) {
-          const firestoreFavGames = userFieldSnap.data().favGames;
-          setFavGames(firestoreFavGames);
-        }
-
-      } catch (error) {
-        console.log(error.message);
-      }
-    }
-    getUserFavGames();
-
-    const updateListener = onSnapshot(doc(db, 'users', user.uid), (snapshot) => {
-      const userData = snapshot.data();
-      if (userData) {
-        const firestoreFavGames = userData.favGames;
-        const firestoreRateGames = userData.rateGames;
-        setRatings(firestoreRateGames);
-        setFavGames(firestoreFavGames);
-      }
-    });
-
-    const unsubscribe = () => {
-      updateListener();
-    };
-
-    return unsubscribe;
-
-  }, [user]);
 
   useEffect(() => {
     if (selectedGenre === '') {
@@ -136,15 +68,15 @@ const Main = () => {
         </form>
       </header>
 
-      {loading ? (<Loading message={'Loading'} />) : (
+      {loading ? (<Modal message={'Loading'} />) : (
         <div className="row">
           {filteredGames && filteredGames.map((game, index) => (
-            <Card ratings={ratings} favGamesArr={favGames} key={String(index)} game={game} />
+            <Card ratings={rateGames} favGamesArr={favGames} key={String(index)} game={game} />
           ))}
         </div>
       )}
 
-      {error && (<Loading message={error} />)}
+      {error && (<Modal message={error} />)}
     </>
   )
 }

@@ -1,8 +1,8 @@
 .card {
   padding: 10px 10px;
-  margin: 10px auto;
+  margin: 10px;
   background-color: #1E2732;
-  box-shadow: #71879f 0px 1px 2px 0px, #71879f 0px 1px 3px 1px;
+  box-shadow: #a9a9a9 0px 1px 2px 0px, #a9a9a9 0px 1px 3px 1px;
 }
 
 .card-body {
@@ -23,14 +23,14 @@
 
 .btn {
   border: none;
-  background-color: #7856ffe3;
+  background-color: #00ba7cdf;
   color: #fff;
   font-weight: bold;
   font-size: 0.8rem;
   padding: 10px;
 
   &:hover {
-    background-color: #7856FF;
+    background-color: #00BA7C;
   }
 }
 
