@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 //hooks
 import { useAuth } from '../../hooks/useAuth';
@@ -8,8 +8,11 @@ import { useAuth } from '../../hooks/useAuth';
 import { useContextValue } from '../../context/AuthContext';
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const { user } = useContextValue();
   const { logout } = useAuth();
+
+
   return (
     <nav className="navbar">
       <div className="container-fluid">
@@ -41,7 +44,10 @@ const Navbar = () => {
               <Link to="/favorite">My Favorite Games</Link>
             </li>
             <li>
-              <Link onClick={logout}>Logout</Link>
+              <Link onClick={() => {
+                logout();
+                navigate('/');
+              }}>Logout</Link>
             </li>
           </ul>
         )}

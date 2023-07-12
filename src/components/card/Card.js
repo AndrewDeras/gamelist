@@ -11,15 +11,15 @@ const Card = ({ game }) => {
   const navigate = useNavigate();
   const [rate, setRate] = useState(0);
   const { user, userData } = useContextValue();
-  const isGameInFavorites = userData && userData.favGames && userData.favGames.some((favGame) => favGame.id === game.id);
-  const isGameInRatedGames = userData && userData.ratedGames && userData.ratedGames.some((ratedGame) => ratedGame.id === game.id);
+  const isGameInFavorites = userData?.favGames?.some((favGame) => favGame.id === game.id);
+  const isGameInRatedGames = userData?.ratedGames?.some((ratedGame) => ratedGame.id === game.id);
 
   useEffect(() => {
     if (isGameInRatedGames) {
       const ratedGame = userData.ratedGames.find((ratedGame) => ratedGame.id === game.id);
       setRate(ratedGame.rate);
     }
-  }, [isGameInRatedGames, userData.ratedGames, game.id]);
+  }, [isGameInRatedGames, userData?.ratedGames, game.id]);
 
   const handleRatingChange = (e) => {
     if (!user) {

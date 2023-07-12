@@ -1,5 +1,6 @@
 import { doc, updateDoc, arrayUnion, arrayRemove } from 'firebase/firestore';
 import { db } from './config';
+import { toast } from 'react-toastify';
 
 export const updateFavGameList = async (user, game, userData) => {
   if (!user) return;
@@ -15,16 +16,16 @@ export const updateFavGameList = async (user, game, userData) => {
       await updateDoc(userDocRef, {
         favGames: arrayRemove(game)
       });
-      console.log('Jogo removido da lista de favoritos.');
+      toast.success('Game removed from favorites list.',);
     } else {
       // se não estiver no array de favoritos é adicionado
       await updateDoc(userDocRef, {
         favGames: arrayUnion(game)
       });
-      console.log('Jogo adicionado à lista de favoritos.');
+      toast.success('Game added to favorites list.',);
     }
 
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.message,);
   }
 };

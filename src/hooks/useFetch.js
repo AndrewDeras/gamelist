@@ -8,8 +8,10 @@ export const useFetch = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     let isMounted = true;
+    setLoading(false);
     setError(null);
 
     const getData = async () => {
@@ -20,6 +22,7 @@ export const useFetch = () => {
           new Promise((resolve, reject) => {
             setTimeout(() => {
               reject(new Error('Server timeout'))
+              setLoading(false);
             }, 5000);
           })
         ]);

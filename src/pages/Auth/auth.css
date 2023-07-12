@@ -19,20 +19,20 @@
 .loginCheck button,
 .registerCheck button {
   border-radius: 0;
-  background-color: #7856FF;
-  color: #F8D7DA;
+  background-color: #00BA7C;
+  color: #FEFEFF;
 }
 
 .loginCheck button:hover,
 .registerCheck button:hover {
   transition: all 300ms ease-in-out;
-  color: #F8D7DA;
-  background-color: #7856ffe3;
+  color: #FEFEFF;
+  background-color: #00ba7cdf;
 }
 
 .loginCheck button.selected,
 .registerCheck button.selected {
-  border-bottom: 2px solid #F8D7DA;
+  border-bottom: 2px solid #FEFEFF;
 }
 
 .formBtn {

@@ -76,7 +76,7 @@ const Main = () => {
         </div>
       )}
 
-      {error && (<Modal message={error} />)}
+      {error && <Modal message={error} />}
     </>
   )
 }
