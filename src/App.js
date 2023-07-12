@@ -62,10 +62,9 @@ function App() {
     return <Modal message="..." />;
   }
 
-
   return (
     <div className="App">
-      <ToastContainer limit={1} autoClose={2000} />
+      <ToastContainer />
       <AuthProvider value={{ user, ...gamesList, userData }}>
         <BrowserRouter>
           <Navbar />

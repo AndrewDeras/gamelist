@@ -40,7 +40,16 @@ export const useFetch = () => {
 
           setGames(data);
           setLoading(false);
-          toast.success('Game List ready');
+          toast.success('Game list ready', {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          });
         }
       } catch (error) {
         if (isMounted) {
