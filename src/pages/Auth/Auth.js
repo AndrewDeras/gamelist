@@ -9,7 +9,7 @@ import Login from '../../components/login/Login';
 import Register from '../../components/register/Register';
 
 const Auth = () => {
-  const [login, setLogin] = useState(false);
+  const [option, setOption] = useState('login');
 
   const handleChoose = (e) => {
     const loginBtn = document.querySelector('.loginBtn');
@@ -20,14 +20,14 @@ const Auth = () => {
       if (loginBtn.classList.contains('selected')) return;
       loginBtn.classList.add('selected');
       registerBtn.classList.remove('selected');
-      setLogin(!login);
+      setOption('login');
     };
 
     if (option.value === 'register') {
       if (registerBtn.classList.contains('selected')) return;
       loginBtn.classList.remove('selected');
       registerBtn.classList.add('selected');
-      setLogin(!login);
+      setOption('createUser');
     };
 
   };
@@ -38,7 +38,7 @@ const Auth = () => {
       <div className="choose">
         <h1>what I want to do?</h1>
         <div className="loginCheck">
-          <button value='login' onClick={handleChoose} className='btn btn-seconday loginBtn'>Login</button>
+          <button value='login' onClick={handleChoose} className='btn btn-seconday loginBtn selected'>Login</button>
         </div>
         <h1>or</h1>
         <div className="registerCheck">
@@ -47,7 +47,7 @@ const Auth = () => {
       </div>
 
       <div className="row">
-        {login ? (
+        {option === 'login' ? (
           <Login />
         ) : (
           <Register />

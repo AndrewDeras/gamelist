@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 
 //context
 import { useContextValue } from '../../context/AuthContext';
@@ -9,8 +8,7 @@ import Card from '../../components/card/Card';
 import Modal from '../../components/modal/Modal';
 
 const Main = () => {
-  const { games, loading, error, userData } = useContextValue();
-  const { favGames, rateGames } = userData ?? {};
+  const { games, loading, error } = useContextValue();
 
   const [selectedGenre, setSelectedGenre] = useState('');
   const [filteredGames, setFilteredGames] = useState([]);
@@ -71,7 +69,7 @@ const Main = () => {
       {loading ? (<Modal message={'Loading'} />) : (
         <div className="row">
           {filteredGames && filteredGames.map((game, index) => (
-            <Card ratings={rateGames} favGamesArr={favGames} key={String(index)} game={game} />
+            <Card key={String(index)} game={game} />
           ))}
         </div>
       )}

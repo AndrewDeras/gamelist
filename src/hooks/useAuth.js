@@ -1,4 +1,5 @@
 import { db } from '../firebase/config';
+import { toast } from 'react-toastify';
 
 import {
   getAuth,
@@ -54,6 +55,7 @@ export const useAuth = () => {
       });
 
       setLoading(false);
+      toast.success(`Welcome ${user.displayName}`);
 
       return user;
 
@@ -88,8 +90,10 @@ export const useAuth = () => {
     setError(null);
 
     try {
-      await signInWithEmailAndPassword(auth, data.email, data.password);
+      const { user } = await signInWithEmailAndPassword(auth, data.email, data.password);
       setLoading(false);
+      toast.success(`Welcome again ${user.displayName}`);
+
     } catch (error) {
       let errorMsg;
 

@@ -16,7 +16,6 @@ export const updateGameRate = async (user, game, rate, userData) => {
           if (ratedGame.id === game.id) {
             if (Number(ratedGame.rate) === Number(rate)) {
               game.rate = ratedGame.rate - 1;
-              console.log(game.rate);
             }
             return { ...ratedGame, rate: game.rate };
           }

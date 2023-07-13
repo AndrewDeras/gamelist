@@ -53,6 +53,7 @@ a {
 }
 
 ul {
+  padding-left: 0;
   display: inline-flex;
   flex-direction: row;
   list-style: none;

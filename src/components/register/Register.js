@@ -57,6 +57,7 @@ const Register = () => {
         <div className='mb-4'>
           <label className='form-label' htmlFor="userName">Username:</label>
           <input
+            autoComplete='on'
             className='form-control'
             type="text"
             name="userName"
@@ -67,6 +68,7 @@ const Register = () => {
         <div className='mb-4'>
           <label className='form-label' htmlFor="email">Email:</label>
           <input
+            autoComplete='on'
             className='form-control'
             type="email"
             name="email"
@@ -77,6 +79,7 @@ const Register = () => {
         <div className='mb-4'>
           <label className='form-label' htmlFor="password">Password:</label>
           <input
+            autoComplete='on'
             className='form-control'
             type="password"
             name="password"
@@ -87,6 +90,7 @@ const Register = () => {
         <div className='mb-4'>
           <label className='form-label' htmlFor="confirmPassword">Confirm password:</label>
           <input
+            autoComplete='on'
             className='form-control'
             type="password"
             name="confirmPassword"

@@ -1,17 +1,3 @@
-::root {
-  --toastify-color-success: #00BA7C;
-}
-
-@keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .card {
   padding: 10px;
   margin: 25px;

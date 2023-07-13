@@ -19,6 +19,7 @@ import { useFetch } from './hooks/useFetch';
 import Main from './pages/Main/Main';
 import Auth from './pages/Auth/Auth';
 import Favorite from './pages/Favorite/Favorite';
+import PageNotFound from './pages/404/PageNotFound';
 
 //components
 import Modal from './components/modal/Modal';
@@ -81,6 +82,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" element={<Main />} />
+            <Route path="*" element={<PageNotFound />} />
             <Route path="/auth" element={!user ? <Auth /> : <Navigate to="/" />} />
             <Route path="/favorite" element={user ? <Favorite /> : <Navigate to="/" />} />
           </Routes>

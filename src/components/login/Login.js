@@ -42,6 +42,7 @@ const Login = () => {
         <div className='mb-4'>
           <label className='form-label' htmlFor="emailLogin">Email:</label>
           <input
+            autoComplete='on'
             className='form-control'
             type="email"
             name="email"
@@ -52,6 +53,7 @@ const Login = () => {
         <div className='mb-4'>
           <label className='form-label' htmlFor="passwordLogin">Password:</label>
           <input
+            autoComplete='on'
             className='form-control'
             type="password"
             name="password"
