@@ -17,9 +17,19 @@ const Card = ({ game }) => {
   useEffect(() => {
     if (isGameInRatedGames) {
       const ratedGame = userData.ratedGames.find((ratedGame) => ratedGame.id === game.id);
+      game.rate = ratedGame.rate;
       setRate(ratedGame.rate);
+    } else {
+      game.rate = 0;
+      setRate(0);
     }
-  }, [isGameInRatedGames, userData?.ratedGames, game.id]);
+
+    if (isGameInFavorites) {
+      game.fav = true;
+    } else {
+      game.fav = false;
+    }
+  }, [game, isGameInFavorites, isGameInRatedGames, userData?.ratedGames, game.id, userData]);
 
   const handleRatingChange = (e) => {
     if (!user) {

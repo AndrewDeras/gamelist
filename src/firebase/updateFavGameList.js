@@ -14,15 +14,15 @@ export const updateFavGameList = async (user, game, userData) => {
     if (isGameInFavorites) {
       // se estiver presente, é removido
       await updateDoc(userDocRef, {
-        favGames: arrayRemove(game)
+        favGames: arrayRemove({ id: game.id, fav: true })
       });
-      toast.success('Game removed from favorites list.',);
+      toast.success(`${game.title} removed from favorites list.`);
     } else {
       // se não estiver no array de favoritos é adicionado
       await updateDoc(userDocRef, {
-        favGames: arrayUnion(game)
+        favGames: arrayUnion({ id: game.id, fav: true })
       });
-      toast.success('Game added to favorites list.',);
+      toast.success(`${game.title} added to favorites list.`);
     }
 
   } catch (error) {

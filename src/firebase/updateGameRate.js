@@ -17,7 +17,7 @@ export const updateGameRate = async (user, game, rate, userData) => {
             if (Number(ratedGame.rate) === Number(rate)) {
               game.rate = ratedGame.rate - 1;
             }
-            return { ...ratedGame, rate: game.rate };
+            return { id: game.id, rate: game.rate };
           }
           return ratedGame;
         })
@@ -25,7 +25,7 @@ export const updateGameRate = async (user, game, rate, userData) => {
     } else {
       // Adiciona o jogo ao array `ratedGames`
       await updateDoc(userDocRef, {
-        ratedGames: arrayUnion(game)
+        ratedGames: arrayUnion({ id: game.id, rate: game.rate })
       });
     }
   } catch (error) {
