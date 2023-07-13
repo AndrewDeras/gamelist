@@ -1,7 +1,5 @@
-import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-
 //hooks
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 // Context
@@ -20,7 +18,7 @@ const Navbar = () => {
           {user ? (
             <h4 id='brand-h4'>Hello {user.displayName}</h4>
           ) : (
-            <h4>Free games to play</h4>
+            <h4 id='brand-h4'>Free games to play</h4>
           )}
         </Link>
         {!user ? (

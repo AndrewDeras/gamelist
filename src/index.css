@@ -16,10 +16,6 @@ body {
   justify-content: center;
 }
 
-h4 {
-  margin-bottom: 0;
-}
-
 #brand-h4 {
   color: #FEFEFF;
   font-weight: bold;
@@ -126,6 +122,10 @@ input[type="password"]:focus {
   border-bottom: 2px solid #71879f;
 }
 
+.form-text {
+  color: #8794A1;
+
+}
 
 .error-msg {
   width: 100%;

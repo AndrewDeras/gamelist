@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+//component
 import Modal from '../../components/modal/Modal';
 
 const PageNotFound = () => {

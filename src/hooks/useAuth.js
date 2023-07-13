@@ -1,5 +1,8 @@
-import { db } from '../firebase/config';
+// bibliotecas
 import { toast } from 'react-toastify';
+
+// firebase
+import { db } from '../firebase/config';
 
 import {
   getAuth,

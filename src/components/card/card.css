@@ -5,6 +5,12 @@
   box-shadow: #a9a9a9 0px 1px 2px 0px, #a9a9a9 0px 1px 3px 1px;
 }
 
+.card-hover:hover {
+  transition: all 300ms ease-in-out;
+  transform: scale(1.10);
+  box-shadow: #a9a9a9 0px 1px 2px 0px, #a9a9a9 0px 1px 3px 1px;
+}
+
 .card-body {
   padding: 10px;
   text-align: center;
@@ -68,6 +74,48 @@
   cursor: pointer;
 }
 
-.fav-animation {
-  animation: rotate 1s linear infinite;
+@keyframes heart-rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes heart-scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.fav.clicked i::before {
+  animation: heart-scale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes star-scale {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+.stars.clicked i::before {
+  animation: star-scale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

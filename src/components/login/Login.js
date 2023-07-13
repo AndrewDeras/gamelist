@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+// bibliotecas
 import validator from 'validator';
 
+// hooks
+import React, { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
 const Login = () => {
@@ -16,6 +18,11 @@ const Login = () => {
 
     setError('');
 
+    if (!email || !password) {
+      setError('There are empty fields');
+      return;
+    }
+
     if (!validator.isEmail(email)) {
       setError('Invalid email');
       return;
@@ -28,10 +35,7 @@ const Login = () => {
 
     const user = { email, password };
 
-    const res = await login(user);
-
-    console.log(res);
-
+    await login(user);
 
   }
 

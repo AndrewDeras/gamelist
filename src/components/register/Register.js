@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+// bibliotecas
 import validator from 'validator';
 
-//hooks
+// hooks
+import React, { useState } from 'react';
 import { useAuth } from "../../hooks/useAuth";
-
 
 const Register = () => {
   const [userName, setUserName] = useState('');
@@ -64,6 +64,7 @@ const Register = () => {
             id="userName"
             value={userName}
             onChange={({ target }) => setUserName(target.value)} />
+          <div className="form-text">Your user name.</div>
         </div>
         <div className='mb-4'>
           <label className='form-label' htmlFor="email">Email:</label>
@@ -75,6 +76,8 @@ const Register = () => {
             id="email"
             value={email}
             onChange={({ target }) => setEmail(target.value)} />
+          <div className="form-text">We'll never share your email with anyone else.</div>
+
         </div>
         <div className='mb-4'>
           <label className='form-label' htmlFor="password">Password:</label>
@@ -86,6 +89,7 @@ const Register = () => {
             id="password"
             value={password}
             onChange={({ target }) => setPassword(target.value)} />
+          <div className="form-text">Password must be 6 or more characters.</div>
         </div>
         <div className='mb-4'>
           <label className='form-label' htmlFor="confirmPassword">Confirm password:</label>
@@ -96,8 +100,9 @@ const Register = () => {
             name="confirmPassword"
             id="confirmPassword"
             value={confirmPassword}
-            onChange={({ target }) => setConfirmPassword(target.value)}
-          />
+            onChange={({ target }) => setConfirmPassword(target.value)} />
+          <div className="form-text">Password must be 6 or more characters.</div>
+
         </div>
         <div className='mb-4'>
           {loading ? (

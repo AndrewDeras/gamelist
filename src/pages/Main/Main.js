@@ -1,5 +1,12 @@
+// bibliotecas
+
+// hooks
 import { useState, useEffect } from 'react';
+
+// context
 import { useContextValue } from '../../context/AuthContext';
+
+//components
 import Modal from '../../components/modal/Modal';
 import Card from '../../components/card/Card';
 

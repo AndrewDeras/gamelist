@@ -1,3 +1,4 @@
+// bibliotecas
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
@@ -15,15 +16,16 @@ import { useAuth } from './hooks/useAuth';
 import { useState, useEffect } from 'react';
 import { useFetch } from './hooks/useFetch';
 
+//components
+import Modal from './components/modal/Modal';
+import Navbar from './components/navbar/Navbar';
+
 //pages
 import Main from './pages/Main/Main';
 import Auth from './pages/Auth/Auth';
 import Favorite from './pages/Favorite/Favorite';
 import PageNotFound from './pages/404/PageNotFound';
 
-//components
-import Modal from './components/modal/Modal';
-import Navbar from './components/navbar/Navbar';
 
 
 function App() {
@@ -67,15 +69,15 @@ function App() {
   return (
     <div className="App">
       <ToastContainer
-        position="top-center"
-        autoClose={2000}
+        position="top-left"
+        autoClose={1800}
         hideProgressBar={false}
         closeOnClick={true}
         pauseOnHover={true}
         draggable={true}
         progress={undefined}
         theme="dark"
-        limit={1}
+
       />
       <AuthProvider value={{ user, ...gamesList, userData }}>
         <BrowserRouter>

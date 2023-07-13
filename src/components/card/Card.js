@@ -1,15 +1,24 @@
+// bibliotecas
+import { toast } from 'react-toastify';
+
+// css
+import './card.css';
+
+// hooks
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+// firebase
 import { updateFavGameList } from '../../firebase/updateFavGameList';
 import { updateGameRate } from '../../firebase/updateGameRate';
 import { useContextValue } from '../../context/AuthContext';
 
-import './card.css';
 
 const Card = ({ game }) => {
   const navigate = useNavigate();
   const [rate, setRate] = useState(0);
+  const [isClicked, setClicked] = useState(false);
+  const [isStarClicked, setStarClicked] = useState(false); // Novo estado
   const { user, userData } = useContextValue();
   const isGameInFavorites = userData?.favGames?.some((favGame) => favGame.id === game.id);
   const isGameInRatedGames = userData?.ratedGames?.some((ratedGame) => ratedGame.id === game.id);
@@ -33,6 +42,7 @@ const Card = ({ game }) => {
 
   const handleRatingChange = (e) => {
     if (!user) {
+      toast.error('You need to login to rate')
       return navigate('/auth');
     }
 
@@ -40,18 +50,30 @@ const Card = ({ game }) => {
     setRate(newRate);
 
     updateGameRate(user, game, newRate, userData);
+
+    setStarClicked(true); // Adicionado
+
+    setTimeout(() => {
+      setStarClicked(false);
+    }, 500);
   };
 
   const handleFav = (game) => {
     if (!user) {
+      toast.error('You need to login to favorite');
       return navigate('/auth');
     }
 
+    setClicked(true);
     updateFavGameList(user, game, userData);
+
+    setTimeout(() => {
+      setClicked(false);
+    }, 1000);
   };
 
   return (
-    <div key={String(game.id)} className="card col-lg-4 col-sm-2" style={{ width: '18rem' }}>
+    <div key={String(game.id)} className="card col-lg-4 col-sm-2 card-hover" style={{ width: '18rem' }}>
       <img src={game.thumbnail} className="card-img-top" alt={game.title} />
       <div className="card-body d-flex flex-column">
         <h4 className="card-title">{game.title}</h4>
@@ -72,10 +94,19 @@ const Card = ({ game }) => {
           {`${game.title} Website`}
         </a>
         <div className="actions">
-          <div onClick={() => handleFav(game)} className="fav">
-            {isGameInFavorites ? <i className="bi bi-heart-fill"></i> : <i className="bi bi-heart"></i>}
+          <div
+            onClick={() => handleFav(game)}
+            className={`fav ${isGameInFavorites && isClicked ? 'clicked' : ''}`}
+          >
+            {isGameInFavorites ? (
+              <i className="bi bi-heart-fill"></i>
+            ) : (
+              <i className="bi bi-heart"></i>
+            )}
           </div>
-          <div className="stars">
+          <div
+            className={`stars ${isStarClicked ? 'clicked' : ''}`}
+          >
             <span>
               <i
                 value={1}
