@@ -7,6 +7,7 @@ import { useContextValue } from '../../context/AuthContext';
 // components
 import Modal from '../../components/modal/Modal';
 import Card from '../../components/card/Card';
+import Up from '../../components/up/Up';
 
 const Favorite = () => {
   const { games, loading, error } = useContextValue();
@@ -97,6 +98,7 @@ const Favorite = () => {
       ) : (
         <Modal message="No favorite games found." />
       )}
+      <Up />
 
       {error && <Modal message={error} />}
     </>

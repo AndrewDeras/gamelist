@@ -26,8 +26,6 @@ import Auth from './pages/Auth/Auth';
 import Favorite from './pages/Favorite/Favorite';
 import PageNotFound from './pages/404/PageNotFound';
 
-
-
 function App() {
   const gamesList = useFetch();
   const { auth } = useAuth();

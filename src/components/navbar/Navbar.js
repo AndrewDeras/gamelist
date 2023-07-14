@@ -12,7 +12,7 @@ const Navbar = () => {
 
 
   return (
-    <nav className="navbar">
+    <nav id='top' className="navbar">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
           {user ? (
