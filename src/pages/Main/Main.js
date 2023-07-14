@@ -9,6 +9,7 @@ import { useContextValue } from '../../context/AuthContext';
 //components
 import Modal from '../../components/modal/Modal';
 import Card from '../../components/card/Card';
+import Up from '../../components/up/Up';
 
 const Main = () => {
   const { games, loading, error } = useContextValue();
@@ -108,6 +109,7 @@ const Main = () => {
           ))}
         </div>
       )}
+      <Up />
 
       {error && <Modal message={error} />}
     </>
