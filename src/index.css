@@ -3,6 +3,10 @@
   color: #FEFEFF;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 #root,
 body {
   background: #15202B;
