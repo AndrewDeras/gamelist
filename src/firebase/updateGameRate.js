@@ -1,3 +1,7 @@
+// bibliiotecas
+
+import { toast } from 'react-toastify';
+
 //firestore
 import { doc, updateDoc, arrayUnion } from 'firebase/firestore';
 import { db } from './config';
@@ -29,6 +33,6 @@ export const updateGameRate = async (user, game, rate, userData) => {
       });
     }
   } catch (error) {
-    console.log(error.message);
+    toast.error("Something went wrong");
   }
 };

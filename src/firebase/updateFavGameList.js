@@ -26,6 +26,6 @@ export const updateFavGameList = async (user, game, userData) => {
     }
 
   } catch (error) {
-    toast.error(error.message,);
+    toast.error("Something went wrong");
   }
 };

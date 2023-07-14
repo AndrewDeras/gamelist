@@ -9,7 +9,6 @@ import { useContextValue } from '../../context/AuthContext';
 //components
 import Modal from '../../components/modal/Modal';
 import Card from '../../components/card/Card';
-import Up from '../../components/up/Up';
 
 const Main = () => {
   const { games, loading, error } = useContextValue();
@@ -18,33 +17,28 @@ const Main = () => {
   const [filteredGames, setFilteredGames] = useState(games);
   const [searchQuery, setSearchQuery] = useState('');
   const [sortByRating, setSortByRating] = useState(false);
-  const [sortedGames, setSortedGames] = useState([]);
+  const [originalGames, setOriginalGames] = useState([]);
 
   useEffect(() => {
-    if (selectedGenre === '') {
-      setFilteredGames(games);
-    } else {
-      const filtered = games.filter((game) => game.genre === selectedGenre);
-      setFilteredGames(filtered);
+    const copy = [...games]
+    setOriginalGames(copy);
+  }, [games]);
+
+  useEffect(() => {
+    let filtered = games;
+
+    if (selectedGenre !== '') {
+      filtered = games.filter((game) => game.genre === selectedGenre);
     }
-  }, [selectedGenre, games]);
 
-  useEffect(() => {
     if (sortByRating) {
-      const sorted = [...filteredGames].sort((a, b) => b.rate - a.rate);
-      setSortedGames(sorted);
+      filtered.sort((a, b) => b.rate - a.rate);
     } else {
-      setSortedGames([]);
+      filtered.sort((a, b) => a.rate - b.rate);
     }
-  }, [sortByRating, filteredGames]);
 
-  useEffect(() => {
-    if (sortedGames.length > 0) {
-      setFilteredGames(sortedGames);
-    } else {
-      setFilteredGames(games);
-    }
-  }, [sortedGames, games]);
+    setFilteredGames(filtered);
+  }, [games, selectedGenre, sortByRating]);
 
   const handleGenreChange = (event) => {
     setSelectedGenre(event.target.value);
@@ -64,6 +58,13 @@ const Main = () => {
 
   const handleSortByRating = () => {
     setSortByRating(!sortByRating);
+  };
+
+  const handleReset = () => {
+    setFilteredGames(originalGames);
+    setSelectedGenre('');
+    setSearchQuery('');
+    setSortByRating(false);
   };
 
   return (
@@ -90,8 +91,11 @@ const Main = () => {
           <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
 
-        <button className="btn btn-outline-primary" onClick={handleSortByRating}>
+        <button className="btn btn-outline-success" onClick={handleSortByRating}>
           Sort by Rating
+        </button>
+        <button className="btn btn-outline-success" onClick={handleReset}>
+          Reset
         </button>
       </header>
 
@@ -104,7 +108,7 @@ const Main = () => {
           ))}
         </div>
       )}
-      <Up />
+
       {error && <Modal message={error} />}
     </>
   );
