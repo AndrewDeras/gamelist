@@ -35,6 +35,11 @@
   border-bottom: 2px solid #FEFEFF;
 }
 
+.formBtn:disabled {
+  color: #FEFEFF;
+  background-color: #00BA7C;
+}
+
 .formBtn {
   width: 100%;
 }
