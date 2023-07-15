@@ -149,3 +149,8 @@ i {
 .btn-outline-success {
   margin: 2px;
 }
+
+.orderBtns {
+  display: flex;
+  gap: 7px;
+}

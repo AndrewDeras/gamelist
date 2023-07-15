@@ -1,13 +1,13 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore } from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyA_7MMc10njhyGXAobsXXk9MojtU_lVMQw",
-  authDomain: "gamelist-4fd3d.firebaseapp.com",
-  projectId: "gamelist-4fd3d",
-  storageBucket: "gamelist-4fd3d.appspot.com",
-  messagingSenderId: "539911300899",
-  appId: "1:539911300899:web:641e9c7a0c79405d38ce96"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_APP_ID
 };
 
 const app = initializeApp(firebaseConfig);

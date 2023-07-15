@@ -1,5 +1,3 @@
-// bibliotecas
-
 // hooks
 import { useState, useEffect } from 'react';
 
@@ -92,12 +90,14 @@ const Main = () => {
           <button className="btn btn-outline-success" type="submit">Search</button>
         </form>
 
-        <button className="btn btn-outline-success" onClick={handleSortByRating}>
-          Sort by Rating
-        </button>
-        <button className="btn btn-outline-success" onClick={handleReset}>
-          Reset
-        </button>
+        <div className='orderBtns' >
+          <button className="btn btn-outline-success" onClick={handleSortByRating}>
+            Sort by Rating
+          </button>
+          <button className="btn btn-outline-success" onClick={handleReset}>
+            Reset Order
+          </button>
+        </div>
       </header>
 
       {loading ? (
