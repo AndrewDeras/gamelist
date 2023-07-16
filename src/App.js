@@ -40,7 +40,7 @@ function App() {
       if (user) {
         const docRef = doc(db, 'users', user.uid);
 
-        // Registra o observador usando onSnapshot()
+        // escuta qualquer mudança no doc users
         const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
           if (docSnapshot.exists()) {
             setUserData(docSnapshot.data());
@@ -61,7 +61,7 @@ function App() {
 
 
   if (loadingUser) {
-    return <Modal message="..." />;
+    return <Modal message="checking user information" />;
   }
 
   return (

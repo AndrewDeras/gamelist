@@ -3,6 +3,25 @@
   color: #FEFEFF;
 }
 
+body::-webkit-scrollbar {
+  width: 12px;
+  /* width of the entire scrollbar */
+}
+
+body::-webkit-scrollbar-track {
+  background: #15202B;
+  /* color of the tracking area */
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #334353;
+  /* color of the scroll thumb */
+  border-radius: 10px;
+  /* roundness of the scroll thumb */
+  border: 3px solid #334353;
+  /* creates padding around scroll thumb */
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -73,6 +92,11 @@ header {
   justify-content: center;
 }
 
+header>form {
+  max-width: 300px;
+  margin: 10px;
+}
+
 .form-select {
   max-width: 300px;
   margin: 10px;
@@ -80,14 +104,6 @@ header {
 
 .form-label {
   margin: 0;
-}
-
-header>form {
-  max-width: 300px;
-  margin: 10px;
-}
-
-label {
   text-align: left;
   font-style: italic;
 }
@@ -106,40 +122,13 @@ label {
     background-color: #273340;
     color: #8794A1;
     box-shadow: none;
+    border-bottom: 1px solid #8794A1;
   }
-}
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-  border: none;
-  outline: none;
-  border-radius: 0;
-  border-bottom: 2px solid #71879f;
-  font-weight: 600;
-}
-
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-  box-shadow: none;
-  border-bottom: 2px solid #71879f;
 }
 
 .form-text {
   color: #8794A1;
 
-}
-
-.error-msg {
-  width: 100%;
-  text-align: center;
-  padding: 10px 0;
-  background-color: #F8D7DA;
-  color: #67272D;
-  border: 1px solid #67272D;
-  border-radius: 5px;
-  font-weight: bold;
 }
 
 i {

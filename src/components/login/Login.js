@@ -30,6 +30,7 @@ const Login = () => {
 
     if (password.length < 6) {
       setError('Password must be 6 or more characters');
+      document.getElementById('passwordLogin').style.border = '2px solid red';
       return;
     }
 

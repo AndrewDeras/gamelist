@@ -60,7 +60,7 @@ const Card = ({ game }) => {
 
   const handleFav = (game) => {
     if (!user) {
-      toast.error('You need to login to favorite');
+      toast.error('You need to login to save in favorites');
       return navigate('/auth');
     }
 
@@ -84,7 +84,9 @@ const Card = ({ game }) => {
         </p>
         <p className="card-text">
           <small>
-            <strong>Platform:</strong> {game.platform}
+            <strong>Platform: </strong> {game.platform.includes('PC (Windows)')
+              ? (<i className="bi bi-windows"> windows</i>)
+              : (game.platform)}
           </small>
         </p>
         <p className="card-text flex-grow-1" style={{ maxHeight: '6rem', overflow: 'hidden' }}>

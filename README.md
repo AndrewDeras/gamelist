@@ -14,10 +14,9 @@ A nova versão do Epic Free Games possui as seguintes funcionalidades:
 
 ## Capturas de tela
 
-Aqui estão algumas capturas de tela da nova versão do Epic Free Games:
-
-![Captura de tela da lista de jogos](./uploads/readme/newEpicFreeGames0.png)
-_Captura 1: Tela principal para dispositivos móveis._
+Aqui estão algumas capturas de tela da antiga e nova versão mostrando a evolução do Epic Free Games:
+![Captura de tela da lista de jogos](./uploads/readme/gamelist1.png)
+_Captura 1: Versão antiga da tela principal._
 
 ![Captura de tela da lista de jogos](./uploads/readme/newEpicFreeGames1.png)
 _Captura 2: Tela principal para computadores._
@@ -27,6 +26,9 @@ _Captura 3: Tela de login._
 
 ![Captura de tela da lista de jogos](./uploads/readme/newEpicFreeGames3.png)
 _Captura 4: Tela principal com o usuário logado._
+
+![Captura de tela da lista de jogos](./uploads/readme/newEpicFreeGames0.png)
+_Captura 5: Tela principal para dispositivos móveis._
 
 ## Bibliotecas e tecnologias utilizadas
 

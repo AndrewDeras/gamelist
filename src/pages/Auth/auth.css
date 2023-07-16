@@ -18,7 +18,7 @@
 
 .loginCheck button,
 .registerCheck button {
-  border-radius: 0;
+  border-radius: 2px;
   background-color: #00BA7C;
   color: #FEFEFF;
 }
@@ -42,4 +42,15 @@
 
 .formBtn {
   width: 100%;
+}
+
+.error-msg {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #F8D7DA;
+  color: #67272D;
+  border: 2px solid #67272D;
+  border-radius: 5px;
+  font-weight: bold;
 }

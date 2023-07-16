@@ -2,7 +2,7 @@
   padding: 10px;
   margin: 25px;
   background-color: #1E2732;
-  box-shadow: #a9a9a9 0px 1px 2px 0px, #a9a9a9 0px 1px 3px 1px;
+  box-shadow: #a9a9a9 0px 2px 4px, #a9a9a9 0px 7px 13px -3px, #a9a9a9 0px -3px 0px inset;
 }
 
 .card-hover:hover {
