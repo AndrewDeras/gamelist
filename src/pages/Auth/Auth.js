@@ -37,12 +37,14 @@ const Auth = () => {
 
       <div className="choose">
         <h1>what I want to do?</h1>
-        <div className="loginCheck">
-          <button value='login' onClick={handleChoose} className='btn btn-seconday loginBtn selected'>Login</button>
-        </div>
-        <h1>or</h1>
-        <div className="registerCheck">
-          <button value='register' onClick={handleChoose} className='btn btn-seconday registerBtn'>Register</button>
+        <div className="chooseBtn">
+          <div className="loginCheck">
+            <button value='login' onClick={handleChoose} className='btn btn-seconday loginBtn selected'>Login</button>
+          </div>
+          <h1>or</h1>
+          <div className="registerCheck">
+            <button value='register' onClick={handleChoose} className='btn btn-seconday registerBtn'>Register</button>
+          </div>
         </div>
       </div>
 

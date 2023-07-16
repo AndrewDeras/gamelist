@@ -66,7 +66,7 @@ const Login = () => {
             value={password}
             onChange={({ target }) => setPassword(target.value)} />
         </div>
-        <div className='mb-4'>
+        <div className='mb-4 submitBtn'>
           {loading ? (
             <button className='formBtn btn btn btn-primary mt-auto' type="submit" disabled >Logging...</button>
           ) : (
